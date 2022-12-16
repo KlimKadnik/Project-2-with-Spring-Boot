@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все Книги</title>
+</head>
+<body>
+
+<form th:method="GET" th:action="@{/books/search}" th:object="${request}">
+    <label for="search">Поиск</label>
+    <input th:name="request" type="text" th:value="${request}" id="search">
+    <input type="submit" value="Найти">
+</form>
+<br/>
+<hr/>
+<br/>
+
+<div th:each="book : ${books}">
+  <a th:style="${booksService.isOutOfDate(book)}?'color:red'" th:href="@{/books/{bookId}(bookId=${book.getBookId()})}"
+     th:text="${book.getBookName() + ', ' + book.getYearOfPublication()}">
+      book
+  </a>
+</div>
+<br/>
+<hr/>
+
+
+<a href="/books/new">добавить новую книгу!</a>
+<a href="/people">список всех людей</a>
+
+</body>
+</html>
